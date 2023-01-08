@@ -3,15 +3,18 @@ import { Stack } from "@mui/material";
 import { categories } from "../utils/constants";
 
 
+//selected & setSelected ra az props Feed miigirim 
 
-const selectedCategory = "New";
-
-
-const Sidebar = () => {
+const Sidebar = ({selectedCategory , setSelectedCategory}) => {
   return (
     <Stack direction="row" sx={{overflowY:"auto" , height:{sx:"auto" , md:"95%"} , flexDirection:{md:"column"}}}>
       {categories.map((category) => (
-        <button className="category-btn" style={{background: category.name === selectedCategory && "#FC1503" , color:"#fff"}} key={category.name} >
+        <button 
+          className="category-btn" 
+          style={{background: category.name === selectedCategory && "#FC1503" , color:"#fff"}} 
+          key={category.name}
+          onClick={() => setSelectedCategory(category.name)}
+        >
           <span style={{color: category.name === selectedCategory ? "#fff" : "#FC1503" , marginRight:  "15px" , marginTop:  "2px"}}>{category.icon}</span>
           <span style={{opacity: category.name === selectedCategory ? "1" : ".7" }}>{category.name}</span>
         </button>
