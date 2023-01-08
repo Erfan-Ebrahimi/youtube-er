@@ -4,9 +4,10 @@ const BASE_URL = 'https://youtube-v31.p.rapidapi.com';
 
 const options = {
   params: {
-    relatedToVideoId: '7ghhRHRP6t4',
-    part: 'id,snippet',
-    type: 'video',
+    //if in gozinehare ro bezarim faghat 50 ta ro barmigardone k hame categoriha mesle haman
+    // relatedToVideoId: '7ghhRHRP6t4',
+    // part: 'id,snippet',
+    // type: 'video',
     maxResults: '50'
   },
     headers: {
