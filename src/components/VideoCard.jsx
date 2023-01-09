@@ -1,16 +1,20 @@
 import { Link } from "react-router-dom";
 
+// ____________ MUI _____________ //
 import { Typography , Card , CardContent , CardMedia , Box } from "@mui/material";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
-import { demoThumbnailUrl , demoVideoUrl , demoVideoTitle , demoChannelUrl , demoChannelTitle } from "../utils/constants";
+// ____________ DEMO _____________ //
+import { demoVideoUrl , demoVideoTitle , demoChannelUrl , demoChannelTitle } from "../utils/constants";
 
 
 
-// destrucher kardim v videoId ra gereftim 
+// destrucher kardim v videoId ra gereftim (video ra az Videos gereftim)
 const VideoCard = ({video: {id: {videoId} , snippet}}) => {
 
-  console.log(videoId , snippet);
+  // console.log(videoId , snippet);
+
+
   return (
     <Card sx={{width:{md:"320px" , xs:"100%"}}}>
       <Link to={videoId ? `/video/${videoId}` : demoVideoUrl}>
