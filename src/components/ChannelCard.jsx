@@ -8,10 +8,9 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { demoProfilePicture } from "../utils/constants";
 
 //channelDetail ra az videos migirm
-const ChannelCard = ({channelDetail}) => {
-  console.log(channelDetail)
+const ChannelCard = ({channelDetail , marginTop}) => {
   return (
-    <Box sx={{borderRadius: "20px", display: "flex", justifyContent: "center", alignItems: "center", width:{xs: "356px" , md: "320px", height: "326px", margin:"auto" } }}>
+    <Box sx={{borderRadius: "20px", display: "flex", justifyContent: "center", alignItems: "center", width:{xs: "356px" , md: "320px", height: "326px", margin:"auto" , marginTop } }}>
       <Link to={`/channel/${channelDetail?.id?.channelId}`}>
         <CardContent sx={{display: "flex", flexDirection: "column",justifyContent: "center", textAlign: "center", color:"#fff"}}>
           <CardMedia 
