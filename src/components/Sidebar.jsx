@@ -1,5 +1,4 @@
-import { Stack } from "@mui/material";
-
+import { Box} from "@mui/material";
 import { categories } from "../utils/constants";
 
 
@@ -7,19 +6,18 @@ import { categories } from "../utils/constants";
 
 const Sidebar = ({selectedCategory , setSelectedCategory}) => {
   return (
-    <Stack direction="row" sx={{overflowY:"auto" , height:{sx:"auto" , md:"95%"} , flexDirection:{md:"column"}}}>
+    <Box className="w-[95%] md:w-[15%] flex flex-row overflow-x-auto gap-x-4 mx-auto md:flex-col ml-3 mt-2 sm:sticky">
       {categories.map((category) => (
         <button 
-          className="category-btn" 
-          style={{background: category.name === selectedCategory && "#FC1503" , color:"#fff"}} 
+          className={`w-full sm:w-[140px] flex items-center px-3  sm:text-base sm:pl-2  sm:h-9 my-2 rounded-md ${category.name === selectedCategory ? "bg-orange-400 text-teal-700 font-bold" : "bg-orange-200 text-zinc-950"}`} 
           key={category.name}
           onClick={() => setSelectedCategory(category.name)}
         >
-          <span style={{color: category.name === selectedCategory ? "#fff" : "#FC1503" , marginRight:  "15px" , marginTop:  "2px"}}>{category.icon}</span>
-          <span style={{opacity: category.name === selectedCategory ? "1" : ".7" }}>{category.name}</span>
+          <span className="text-red-700">{category.icon}</span>
+          <span className="ml-1">{category.name}</span>
         </button>
       ))}
-    </Stack>
+    </Box>
   )
 }
 

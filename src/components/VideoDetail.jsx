@@ -1,14 +1,15 @@
-import { useState , useEffect } from "react";
-import { Link , useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 
 // ____________ PLAYER _____________ //
 import ReactPlayer from "react-player";
 
 // ____________ COMPONENTS _____________ //
-import {Videos} from "./";
+import { Videos } from "./";
+import { TwinSpin } from "react-cssfx-loading";
 
 // ____________ MUI _____________ //
-import { Typography , Box , Stack } from "@mui/material";
+import { Typography, Box, Stack } from "@mui/material";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -18,9 +19,9 @@ import { fetchFromAPI } from "../utils/fetchFromAPI";
 
 const VideoDetail = () => {
 
-  const [videoDetail , setVideoDetail] = useState(null);
-  const [videos , setVideos] = useState([])
-  const {id} = useParams();
+  const [videoDetail, setVideoDetail] = useState(null);
+  const [videos, setVideos] = useState([])
+  const { id } = useParams();
 
   // ham snippet ra migigrim ham statistics
   useEffect(() => {
@@ -28,48 +29,46 @@ const VideoDetail = () => {
       .then((data) => setVideoDetail(data.items[0]));
 
     fetchFromAPI(`search?part=snippet&relatedToVideoIdid=${id}&type=video`)
-      .then((data) => setVideos(data.items));  
-  } , [id])
+      .then((data) => setVideos(data.items));
+  }, [id])
 
-  if(!videoDetail?.snippet) return "Loading . . ."    //if data nadashtim 
+  if (!videoDetail?.snippet) return <div className="min-h-screen mx-auto flex flex-col items-center justify-center"><TwinSpin color="#ea580c" width="40px" height="40px" duration="1s"/><p className="mt-10 text-orange-400 text-xl">Loading . . .</p></div>    //if data nadashtim 
 
 
   console.log(videoDetail)
   //destrucher kardim
-  const { snippet : {title , channelId , channelTitle} , statistics : {viewCount , likeCount}} = videoDetail;
+  const { snippet: { title, channelId, channelTitle }, statistics: { viewCount, likeCount } } = videoDetail;
 
   return (
-    <Box minHeight="95vh">
-      <Stack direction={{xs: "column", md: "row" }}>
-        <Box flex={1}>
-          <Box sx={{width: "100%", top: "86px" }}>
-            <ReactPlayer url={`https://www.youtube.com/watch?v=${id}`} className="react-player" controls/>
-            <Typography color="#f3f3f3" variant="h5" fontWeight="bold" p={2}>
-              {title}
-            </Typography>
-          </Box>
-          <Stack direction="row" justifyContent="space-between" alignItems="center"  px={2} sx={{color: "#fefefe"}}>
-            <Link to={`/channel/${channelId}`}>
-              <Typography mt={1} color="#fff" display="flex" alignItems="center" variant="body1"  >
-                {channelTitle}
-                <CheckCircleOutlineIcon sx={{fontSize: 17, color: "green", marginLeft: "4px",}}/>
-              </Typography>
-            </Link>
-            <Stack direction="row" gap="25px" alignItems="center">
-              <Typography variant="body1" color="#fff" sx={{opacity: '.7' , display: "flex" , alignItems: "center"}}>
-                {parseInt(viewCount).toLocaleString()} <RemoveRedEyeIcon sx={{ fontSize: 20, color: "yellow", marginLeft: "4px",}} />
-              </Typography>
-              <Typography variant="body1" color="#fff" sx={{opacity: '.7' , display: "flex" , alignItems: "center"}}>
-                {parseInt(likeCount).toLocaleString()} <FavoriteIcon sx={{ fontSize: 17, color: "red", marginLeft: "4px",}}/>
-              </Typography>
-            </Stack>
-          </Stack>
+    <Stack className="flex flex-col">
+      <Box className="border-b border-red-400">
+        <Box>
+          <ReactPlayer url={`https://www.youtube.com/watch?v=${id}`} className="react-player" controls />
+          <Typography className="font-bold text-3xl p-3 text-red-400">
+            {title}
+          </Typography>
         </Box>
-      <Box px={2} py={{md: 1 , sx: 5}} justifyContent="center" alignItems="center">
-        <Videos videos={videos} direction="column"/>
+        <Stack className="flex flex-row justify-between px-4 pb-5">
+          <Link to={`/channel/${channelId}`}>
+            <Typography mt={1} color="#fff" display="flex" alignItems="center" variant="body1"  >
+              {channelTitle}
+              <CheckCircleOutlineIcon sx={{ fontSize: 17, color: "green", marginLeft: "4px", }} />
+            </Typography>
+          </Link>
+          <Stack className="flex items-center flex-row gap-x-4">
+            <Typography className="text-white flex items-center gap-x-1">
+              {parseInt(viewCount).toLocaleString()} <RemoveRedEyeIcon className="text-2xl text-yellow-300" />
+            </Typography>
+            <Typography className="text-white flex items-center gap-x-1">
+              {parseInt(likeCount).toLocaleString()} <FavoriteIcon className="text-xl text-red-600"/>
+            </Typography>
+          </Stack>
+        </Stack>
       </Box>
-      </Stack>
-    </Box>
+      <Box className="mt-10 mx-auto">
+        <Videos videos={videos} />
+      </Box>
+    </Stack>
   )
 }
 

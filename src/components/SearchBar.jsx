@@ -26,15 +26,15 @@ const SearchBar = () => {
     <Paper
         component="form"
         onSubmit={handleSubmit}
-        sx={{borderRadius:20, border: "1px solid red", boxShadow: "none" , pl: 2 , mr:{sm: 5} }}
+        className="bg-zinc-900 rounded-xl pl-2 sm:mr-3 border border-red-400"
     >
         <input
-            className="search-bar"
+            className="search-bar bg-zinc-900 text-zinc-400 outline-none w-[320px]"
             placeholder="Search . . . "
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <IconButton type="submit" sx={{p: "10px" , color: "red"}} >
+        <IconButton type="submit" className="p-2.5 text-red-500" >
             <SearchIcon/>
         </IconButton>
     </Paper>

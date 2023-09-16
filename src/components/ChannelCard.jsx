@@ -16,7 +16,8 @@ const ChannelCard = ({channelDetail , marginTop}) => {
           <CardMedia 
             image={channelDetail?.snippet?.thumbnails?.high?.url || demoProfilePicture}
             alt={channelDetail?.snippet?.title}
-            sx={{borderRadius: "50%", height: "150px", width: "180px", mb:2, border: "1px solid red", marginX:"auto"}}
+            sx={{borderRadius: "10%", height: "150px", width: "180px", mb:2,marginX:"auto"}}
+            className="border-2 border-orange-500"
           />
           <Typography variant="h6">
             {channelDetail?.snippet?.title}

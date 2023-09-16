@@ -25,21 +25,16 @@ const ChannelDetail = () => {
 
     fetchFromAPI(`search?channelId=${id}&part=snippet&order=date`)
     .then((data) => setVideos(data?.items))
-
   } , [id])
-
-  console.log(videos);
 
   return (
     <Box minHeight="95vh">
       <Box>
-        <div style={{background: "red", zIndex: 10, height: "300px" }}/>
+        <div className="bg-red-600" style={{zIndex: 10, height: "100px" }}/>
         <ChannelCard channelDetail={channelDetail} marginTop="-120px"/>
       </Box>
-      <Box display="flex" p="2">
-        <Box sx={{ml: {sm: "80px"}}}>
+        <Box className="flex justify-center">
           <Videos videos={videos}/>
-        </Box>
       </Box>
     </Box>
   )

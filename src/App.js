@@ -8,7 +8,7 @@ import {Navbar , Feed , SearchFeed , VideoDetail , ChannelDetail} from "./compon
 
 function App() {
   return (
-    <Box sx={{backgroundColor : "#000" , color:"white"}}>
+    <Box className="bg-zinc-900">
       <Navbar/>
       <Routes>
         <Route path="/" exact element={<Feed/>}/>
